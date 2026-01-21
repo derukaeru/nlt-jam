@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://djynssc3ppg8t"]
+
+[ext_resource type="Script" uid="uid://ck66n07go3dlt" path="res://scenes/ui/splash_screen.gd" id="1_yei5s"]
+
+[sub_resource type="Animation" id="Animation_m0ilf"]
+resource_name = "show"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eina6"]
+_data = {
+&"show": SubResource("Animation_m0ilf")
+}
+
+[node name="splash_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yei5s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eina6")
+}
+
+[node name="cover" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
