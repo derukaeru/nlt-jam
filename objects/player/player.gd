@@ -17,7 +17,6 @@ func _physics_process(delta):
 	$Camera3D.rotation_degrees.y -= mouse_delta.x
 	$Camera3D.rotation_degrees.x -= mouse_delta.y 
 	$Camera3D.rotation_degrees.x = clamp($Camera3D.rotation_degrees.x, -50, 40)
-	$model.rotation_degrees.y = $Camera3D.rotation_degrees.y
 	mouse_delta = Vector2.ZERO 
 	
 	var direction = Vector3.ZERO

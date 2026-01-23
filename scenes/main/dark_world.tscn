@@ -1,3 +1,32 @@
-[gd_scene format=3 uid="uid://unkpy0s0x5bo"]
+[gd_scene load_steps=6 format=3 uid="uid://unkpy0s0x5bo"]
+
+[ext_resource type="Script" uid="uid://bktg3sr83mphq" path="res://objects/collider/collider.gd" id="1_3vvq5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ey5m8"]
+shading_mode = 0
+albedo_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3vvq5"]
+material = SubResource("StandardMaterial3D_ey5m8")
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cx1jn"]
+albedo_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fbav2"]
+material = SubResource("StandardMaterial3D_cx1jn")
 
 [node name="dark_world" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_3vvq5")
+
+[node name="Collider" type="StaticBody3D" parent="."]
+script = ExtResource("1_3vvq5")
+metadata/_custom_type_script = "uid://bktg3sr83mphq"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collider"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47356492, 0)
+mesh = SubResource("BoxMesh_fbav2")

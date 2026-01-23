@@ -11,3 +11,6 @@ func change_scene(path:String):
 
 func input(id):
 	return Input.is_action_pressed(id)
+
+func input_once(id):
+	return Input.is_action_just_pressed(id)
