@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dirtfgvqbey4y"]
+
+[ext_resource type="Script" uid="uid://y2bat18jcaj0" path="res://objects/door/door.gd" id="1_lu671"]
+[ext_resource type="Script" uid="uid://wuqwvyxg3bpe" path="res://objects/interactable/interactable.gd" id="2_0i0ho"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lu671"]
+transparency = 4
+shading_mode = 0
+albedo_color = Color(0.3209604, 0.6620832, 0.7958603, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0i0ho"]
+size = Vector3(1.7353516, 3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y765d"]
+size = Vector3(3.7313766, 4.260544, 0.47607422)
+
+[node name="door" type="StaticBody3D" groups=["interactable"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_lu671")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." groups=["dual_collider"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018096209, 2.2, 0)
+size = Vector3(3, 5, 0.5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D" groups=["dual_collider"]]
+operation = 2
+size = Vector3(2.4, 4.4, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D" groups=["dual_collider"]]
+size = Vector3(2.8, 5, 0.2)
+material = SubResource("StandardMaterial3D_lu671")
+
+[node name="Interactable" type="StaticBody3D" parent="." groups=["interactable"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("2_0i0ho")
+metadata/_custom_type_script = "uid://wuqwvyxg3bpe"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024902344, 1, 0)
+shape = SubResource("BoxShape3D_0i0ho")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08167648, 1.6302719, -0.00024414063)
+shape = SubResource("BoxShape3D_y765d")
+
+[connection signal="interacted" from="Interactable" to="." method="interact"]

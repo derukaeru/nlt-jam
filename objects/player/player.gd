@@ -9,26 +9,26 @@ var mouse_delta := Vector2.ZERO
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) 
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_delta = event.relative * look_sensitivity
 
 func _physics_process(delta):
-	$Camera3D.rotation_degrees.y -= mouse_delta.x
-	$Camera3D.rotation_degrees.x -= mouse_delta.y 
-	$Camera3D.rotation_degrees.x = clamp($Camera3D.rotation_degrees.x, -50, 40)
+	$%Camera3D.rotation_degrees.y -= mouse_delta.x
+	$%Camera3D.rotation_degrees.x -= mouse_delta.y 
+	$%Camera3D.rotation_degrees.x = clamp($%Camera3D.rotation_degrees.x, -50, 40)
 	mouse_delta = Vector2.ZERO 
 	
 	var direction = Vector3.ZERO
 	if can_move:
 		if Global.input("forward"):
-			direction -= $Camera3D.transform.basis.z 
+			direction -= $%Camera3D.transform.basis.z 
 		if Global.input("backward"):
-			direction += $Camera3D.transform.basis.z
+			direction += $%Camera3D.transform.basis.z
 		if Global.input("left"):
-			direction -= $Camera3D.transform.basis.x
+			direction -= $%Camera3D.transform.basis.x
 		if Global.input("right"):
-			direction += $Camera3D.transform.basis.x
+			direction += $%Camera3D.transform.basis.x
 		
 		#if Global.input("forward") or Global.input("backward") or Global.input("left") or Global.input("right"):
 			#$model/AnimationPlayer.play("walk")
@@ -38,19 +38,30 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized() * speed * delta
 	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	
 	velocity.x = direction.x
 	velocity.z = direction.z
-
+	
 	move_and_slide()
+	
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"):  
+	if Global.input_once("ui_cancel"):  
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	if $Camera3D/RayCast3D.is_colliding():
-		for a in $Camera3D/RayCast3D.get_collider():
-			if a.is_in_group("interactable") and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if $%Camera3D/RayCast3D.is_colliding():
+		var a = $%Camera3D/RayCast3D.get_collider()	
+		if a.is_in_group("interactable"):
+			$Camera3D/ui/tooltip.show()
+			if Global.input_once("click"):
 				a.interact()
+		else:
+			$Camera3D/ui/tooltip.hide()
+	
+	if Global.input_once("reset"):
+		Global.get_main().reset()

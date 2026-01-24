@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctj7c38ccqrgj"]
+[gd_scene load_steps=8 format=3 uid="uid://ctj7c38ccqrgj"]
 
-[ext_resource type="PackedScene" uid="uid://d0nvkapnfb8od" path="res://scenes/main/light_world.tscn" id="1_iuonh"]
 [ext_resource type="Script" uid="uid://c8humbslvpbq" path="res://scenes/main/main.gd" id="1_l3cfh"]
-[ext_resource type="PackedScene" uid="uid://unkpy0s0x5bo" path="res://scenes/main/dark_world.tscn" id="2_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://c5ij3qjdkkvnf" path="res://scenes/levels/level_1.tscn" id="2_k2fmo"]
 [ext_resource type="PackedScene" uid="uid://gj7lbxm0x0i5" path="res://objects/player/player.tscn" id="3_k2fmo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k2fmo"]
@@ -14,11 +13,12 @@ sky_material = SubResource("ProceduralSkyMaterial_k2fmo")
 
 [sub_resource type="Environment" id="Environment_6q06x"]
 background_mode = 1
+background_color = Color(0.7294118, 0.7294118, 0.7294118, 1)
 sky = SubResource("Sky_l3cfh")
 tonemap_mode = 2
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_l3cfh"]
-size = Vector2(20, 20)
+[sub_resource type="BoxShape3D" id="BoxShape3D_k2fmo"]
+size = Vector3(100, 50, 100)
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_l3cfh")
@@ -30,11 +30,17 @@ environment = SubResource("Environment_6q06x")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="light_world" parent="." instance=ExtResource("1_iuonh")]
+[node name="world" type="Node3D" parent="." groups=["current_world"]]
 
-[node name="dark_world" parent="." instance=ExtResource("2_k2fmo")]
-
-[node name="floor" type="MeshInstance3D" parent="." groups=["dual_collider"]]
-mesh = SubResource("PlaneMesh_l3cfh")
+[node name="level_1" parent="world" instance=ExtResource("2_k2fmo")]
 
 [node name="player" parent="." instance=ExtResource("3_k2fmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6.5800657, 0)
+
+[node name="reset_area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="reset_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -31, 0)
+shape = SubResource("BoxShape3D_k2fmo")
+
+[connection signal="body_entered" from="reset_area" to="." method="_on_reset_area_body_entered"]
