@@ -50,3 +50,7 @@ func _process(_delta):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
+	if $Camera3D/RayCast3D.is_colliding():
+		for a in $Camera3D/RayCast3D.get_collider():
+			if a.is_in_group("interactable") and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+				a.interact()

@@ -33,6 +33,8 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 player=""
 light_collider=""
 dark_collider=""
+interactable=""
+dual_collider=""
 
 [input]
 

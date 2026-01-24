@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctj7c38ccqrgj"]
+[gd_scene load_steps=9 format=3 uid="uid://ctj7c38ccqrgj"]
 
 [ext_resource type="PackedScene" uid="uid://d0nvkapnfb8od" path="res://scenes/main/light_world.tscn" id="1_iuonh"]
 [ext_resource type="Script" uid="uid://c8humbslvpbq" path="res://scenes/main/main.gd" id="1_l3cfh"]
@@ -14,9 +14,11 @@ sky_material = SubResource("ProceduralSkyMaterial_k2fmo")
 
 [sub_resource type="Environment" id="Environment_6q06x"]
 background_mode = 1
-background_color = Color(0.83889705, 0.83889705, 0.838897, 1)
 sky = SubResource("Sky_l3cfh")
 tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l3cfh"]
+size = Vector2(20, 20)
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_l3cfh")
@@ -31,5 +33,8 @@ shadow_enabled = true
 [node name="light_world" parent="." instance=ExtResource("1_iuonh")]
 
 [node name="dark_world" parent="." instance=ExtResource("2_k2fmo")]
+
+[node name="floor" type="MeshInstance3D" parent="." groups=["dual_collider"]]
+mesh = SubResource("PlaneMesh_l3cfh")
 
 [node name="player" parent="." instance=ExtResource("3_k2fmo")]
