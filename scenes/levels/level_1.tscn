@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5ij3qjdkkvnf"]
+[gd_scene load_steps=8 format=3 uid="uid://c5ij3qjdkkvnf"]
 
 [ext_resource type="PackedScene" uid="uid://dirtfgvqbey4y" path="res://objects/door/door.tscn" id="1_ksju7"]
 
@@ -14,7 +14,11 @@ size = Vector3(6, 49, 5)
 [sub_resource type="BoxMesh" id="BoxMesh_6761a"]
 size = Vector3(6, 49, 5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ksju7"]
+albedo_color = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_sk5k4"]
+material = SubResource("StandardMaterial3D_ksju7")
 
 [node name="level_1" type="Node3D"]
 

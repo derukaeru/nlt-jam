@@ -36,6 +36,8 @@ interactable=""
 dual_collider=""
 main_camera=""
 current_world=""
+box=""
+plate=""
 
 [gui]
 

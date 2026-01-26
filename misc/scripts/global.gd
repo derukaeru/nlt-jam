@@ -6,6 +6,9 @@ func get_main():
 func get_group_node(group): 
 	return get_tree().get_first_node_in_group(group)
 
+func get_nodes_in_group(group):
+	return get_tree().get_nodes_in_group(group)
+
 func change_scene(path:String):
 	get_tree().change_scene_to_file(path)
 

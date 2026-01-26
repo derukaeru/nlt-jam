@@ -19,16 +19,17 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_lu671")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." groups=["dual_collider"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018096209, 2.2, 0)
-size = Vector3(3, 5, 0.5)
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018, 1.5, 0)
+use_collision = true
+size = Vector3(2.4, 3.2, 0.5)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D" groups=["dual_collider"]]
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
 operation = 2
-size = Vector3(2.4, 4.4, 1)
+size = Vector3(2, 3, 1)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D" groups=["dual_collider"]]
-size = Vector3(2.8, 5, 0.2)
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+size = Vector3(2, 3, 0.2)
 material = SubResource("StandardMaterial3D_lu671")
 
 [node name="Interactable" type="StaticBody3D" parent="." groups=["interactable"]]

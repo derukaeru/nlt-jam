@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ctj7c38ccqrgj"]
 
 [ext_resource type="Script" uid="uid://c8humbslvpbq" path="res://scenes/main/main.gd" id="1_l3cfh"]
-[ext_resource type="PackedScene" uid="uid://c5ij3qjdkkvnf" path="res://scenes/levels/level_1.tscn" id="2_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://s8htah8mfb76" path="res://scenes/levels/level_5.tscn" id="2_k2fmo"]
 [ext_resource type="PackedScene" uid="uid://gj7lbxm0x0i5" path="res://objects/player/player.tscn" id="3_k2fmo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k2fmo"]
@@ -32,10 +32,10 @@ shadow_enabled = true
 
 [node name="world" type="Node3D" parent="." groups=["current_world"]]
 
-[node name="level_1" parent="world" instance=ExtResource("2_k2fmo")]
+[node name="level_5" parent="world" instance=ExtResource("2_k2fmo")]
 
 [node name="player" parent="." instance=ExtResource("3_k2fmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6.5800657, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8.5, 0.5)
 
 [node name="reset_area" type="Area3D" parent="."]
 

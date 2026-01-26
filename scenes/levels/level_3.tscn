@@ -1,3 +1,85 @@
-[gd_scene format=3 uid="uid://qmjheo3dt0og"]
+[gd_scene load_steps=12 format=3 uid="uid://qmjheo3dt0og"]
+
+[ext_resource type="Script" uid="uid://c2olv5vrvddwo" path="res://scenes/levels/level_3.gd" id="1_fmg3e"]
+[ext_resource type="PackedScene" uid="uid://c7fjjwh4ddkcs" path="res://objects/collider/collider.tscn" id="1_o8c3j"]
+[ext_resource type="PackedScene" uid="uid://dirtfgvqbey4y" path="res://objects/door/door.tscn" id="2_44gv1"]
+[ext_resource type="PackedScene" uid="uid://csvtlo2yawipt" path="res://objects/sliding_door/sliding_door.tscn" id="3_0qepi"]
+[ext_resource type="PackedScene" uid="uid://f6xspoi1ws8y" path="res://objects/plate/plate.tscn" id="4_fmg3e"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_44gv1"]
+size = Vector3(5.2, 0.1, 1.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8c3j"]
+size = Vector3(5, 0.1, 1.794397)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0ljxa"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ljxa"]
+size = Vector3(3.4864502, 0.988, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0qepi"]
+size = Vector3(6, 0.4, 2.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fmg3e"]
+size = Vector3(2.9973145, 0.4, 5)
 
 [node name="level_3" type="Node3D"]
+script = ExtResource("1_fmg3e")
+
+[node name="collider" parent="." instance=ExtResource("1_o8c3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1952692, 0, 0)
+mesh = SubResource("BoxMesh_44gv1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4503675, 0, -0.0064513683)
+shape = SubResource("BoxShape3D_o8c3j")
+
+[node name="collider2" parent="." instance=ExtResource("1_o8c3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9571195, 1.8041375, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27342463, 0, 0)
+mesh = SubResource("BoxMesh_0ljxa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7567749, -0.24224901, 0)
+shape = SubResource("BoxShape3D_0ljxa")
+
+[node name="collider3" parent="." instance=ExtResource("1_o8c3j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4946141, 1.8526871, -1.5802047)
+layer = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider3"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -0.50935864)
+mesh = SubResource("BoxMesh_0qepi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005004883, 0, 0)
+shape = SubResource("BoxShape3D_fmg3e")
+
+[node name="door" parent="." instance=ExtResource("2_44gv1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5006242, 2, -4.823859)
+
+[node name="sliding_door" parent="." instance=ExtResource("3_0qepi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5023987, 2, -2.359235)
+
+[node name="plate" parent="." instance=ExtResource("4_fmg3e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5106344, 1.905236, -0.37405604)
+entity = 0
+color = Color(0.20392157, 0.56078434, 0.56078434, 1)
+
+[node name="plate2" parent="." instance=ExtResource("4_fmg3e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4548492, 1.914772, 0)
+entity = 0
+
+[node name="sliding_door2" parent="." instance=ExtResource("3_0qepi")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.4414194, 2.0151832, 0)
+color = Color(0.20477557, 0.56274235, 0.56091005, 1)
+
+[connection signal="pressed" from="plate" to="." method="_on_plate_pressed"]
+[connection signal="pressed" from="plate2" to="." method="_on_plate_2_pressed"]

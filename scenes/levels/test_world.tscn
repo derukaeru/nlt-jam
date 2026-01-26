@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bp2islj43540w"]
+
+[ext_resource type="Script" uid="uid://lcdxvsxcc678" path="res://scenes/levels/test_world.gd" id="1_0huwb"]
+[ext_resource type="PackedScene" uid="uid://dso5ec6wllqdg" path="res://objects/box/box.tscn" id="1_1mgh8"]
+[ext_resource type="PackedScene" uid="uid://f6xspoi1ws8y" path="res://objects/plate/plate.tscn" id="2_8a5hx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aqios"]
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1mgh8"]
+size = Vector3(10, 1.2539673, 10)
+
+[node name="test_world" type="Node3D"]
+script = ExtResource("1_0huwb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["dual_collider"]]
+mesh = SubResource("PlaneMesh_aqios")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.62301636, 0)
+shape = SubResource("BoxShape3D_1mgh8")
+
+[node name="box" parent="." instance=ExtResource("1_1mgh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="plate" parent="." instance=ExtResource("2_8a5hx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5398843)
+
+[connection signal="pressed" from="plate" to="." method="_on_plate_pressed"]

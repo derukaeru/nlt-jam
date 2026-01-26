@@ -1,3 +1,139 @@
-[gd_scene format=3 uid="uid://b3xg2xjtphus"]
+[gd_scene load_steps=19 format=3 uid="uid://b3xg2xjtphus"]
+
+[ext_resource type="PackedScene" uid="uid://c7fjjwh4ddkcs" path="res://objects/collider/collider.tscn" id="1_j2425"]
+[ext_resource type="Script" uid="uid://ldlite42mnc0" path="res://scenes/levels/level_2.gd" id="1_l37oo"]
+[ext_resource type="PackedScene" uid="uid://dso5ec6wllqdg" path="res://objects/box/box.tscn" id="2_g2h2n"]
+[ext_resource type="PackedScene" uid="uid://f6xspoi1ws8y" path="res://objects/plate/plate.tscn" id="4_qpwj6"]
+[ext_resource type="PackedScene" uid="uid://csvtlo2yawipt" path="res://objects/sliding_door/sliding_door.tscn" id="5_ibugp"]
+[ext_resource type="PackedScene" uid="uid://dirtfgvqbey4y" path="res://objects/door/door.tscn" id="6_qpwj6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j2425"]
+size = Vector3(5, 1, 7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g2h2n"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ra442"]
+size = Vector3(2, 1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fiq81"]
+size = Vector3(2, 1, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l37oo"]
+size = Vector3(5, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qpwj6"]
+size = Vector3(5, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g2h2n"]
+size = Vector3(5, 1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fiq81"]
+size = Vector3(5, 1, 2.9903564)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8qukl"]
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3p04p"]
+size = Vector3(2, 0.6092529, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpwj6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ibugp"]
+size = Vector3(1.4, 3.4, 0.5)
 
 [node name="level_2" type="Node3D"]
+script = ExtResource("1_l37oo")
+
+[node name="collider" parent="." instance=ExtResource("1_j2425")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -9)
+layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_j2425")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider"]
+shape = SubResource("BoxShape3D_g2h2n")
+
+[node name="collider2" parent="." instance=ExtResource("1_j2425")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+shape = SubResource("BoxShape3D_ra442")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5031343)
+mesh = SubResource("BoxMesh_fiq81")
+
+[node name="collider3" parent="." instance=ExtResource("1_j2425")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 3)
+layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider3"]
+shape = SubResource("BoxShape3D_l37oo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider3"]
+mesh = SubResource("BoxMesh_qpwj6")
+
+[node name="collider4" parent="." instance=ExtResource("1_j2425")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 6)
+layer = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider4"]
+mesh = SubResource("BoxMesh_g2h2n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0029363632)
+shape = SubResource("BoxShape3D_fiq81")
+
+[node name="box" parent="." instance=ExtResource("2_g2h2n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.362891, 5, 5.5339127)
+
+[node name="collider5" parent="." instance=ExtResource("1_j2425")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23927009, 0)
+mesh = SubResource("BoxMesh_8qukl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0039225817, -0.19537354, 0.0042886734)
+shape = SubResource("BoxShape3D_3p04p")
+
+[node name="plate" parent="." instance=ExtResource("4_qpwj6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="sliding_door" parent="." instance=ExtResource("5_ibugp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4988, -8.9492855)
+
+[node name="collider6" parent="." instance=ExtResource("1_j2425")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5, -9)
+layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider6"]
+shape = SubResource("BoxShape3D_qpwj6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18083572, 1, 0)
+mesh = SubResource("BoxMesh_ibugp")
+
+[node name="collider7" parent="." instance=ExtResource("1_j2425")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, -9)
+layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="collider7"]
+shape = SubResource("BoxShape3D_qpwj6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="collider7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20720434, 1, 0)
+mesh = SubResource("BoxMesh_ibugp")
+skeleton = NodePath("../../collider6")
+
+[node name="door" parent="." instance=ExtResource("6_qpwj6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4641895, -12)
+
+[connection signal="depressed" from="plate" to="." method="_on_plate_depressed"]
+[connection signal="pressed" from="plate" to="." method="_on_plate_pressed"]

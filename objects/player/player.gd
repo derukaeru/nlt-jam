@@ -6,6 +6,8 @@ extends CharacterBody3D
 var can_move = true
 var mouse_delta := Vector2.ZERO
 
+var push_force = 1.0
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) 
 
@@ -16,7 +18,7 @@ func _input(event):
 func _physics_process(delta):
 	$%Camera3D.rotation_degrees.y -= mouse_delta.x
 	$%Camera3D.rotation_degrees.x -= mouse_delta.y 
-	$%Camera3D.rotation_degrees.x = clamp($%Camera3D.rotation_degrees.x, -50, 40)
+	$%Camera3D.rotation_degrees.x = clamp($%Camera3D.rotation_degrees.x, -80, 80)
 	mouse_delta = Vector2.ZERO 
 	
 	var direction = Vector3.ZERO
@@ -37,6 +39,11 @@ func _physics_process(delta):
 	
 	if direction != Vector3.ZERO:
 		direction = direction.normalized() * speed * delta
+	
+	for i in get_slide_collision_count():
+		var c = get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
