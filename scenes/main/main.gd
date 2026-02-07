@@ -3,7 +3,7 @@ extends Node3D
 enum WORLDS { LIGHT, DARK }
 var curr_world = WORLDS.LIGHT
 
-var curr_level = 5
+var curr_level = 1
 var level_spawn = [Vector3(8.0, 6.58, 0.0), Vector3(0.0, 5.0, 6.0), Vector3(-1.0, 2.5, 0.0), Vector3(-21.0, 35.5, 0.0), Vector3(-2.0, 8.5, 0.5)]
 
 func _ready():
