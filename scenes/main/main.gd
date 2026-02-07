@@ -12,6 +12,8 @@ func _ready():
 	change_group_nodes_alpha("light_collider", 1, Color(255, 255, 255))
 	change_group_nodes_alpha("dark_collider", .5, Color(0.0, 0.0, 0.0, 1.0))
 	change_group_nodes_alpha("dual_collider", 1, Color("767676ff"))
+	
+	$AnimationPlayer.play("show")
 
 func player_change_collision(layer, value):
 	var player = Global.get_group_node("player")
@@ -97,8 +99,17 @@ func reset():
 		Global.get_group_node("player").position = level_spawn[level_index]
 
 func next_level():
-	curr_level += 1
-	reset()
+	if curr_level == 3:
+		for c in $world.get_children():
+			c.queue_free()
+		
+		var level = load("res://scenes/levels/level_end.tscn").instantiate()
+		$world.add_child(level)
+		
+		Global.get_group_node("player").position = Vector3.ZERO
+	else:
+		curr_level += 1
+		reset()
 
 func _physics_process(_delta):
 	if Global.input_once("interact"):

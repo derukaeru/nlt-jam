@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://dpjcjalrl3qqm"]
+[gd_scene load_steps=35 format=3 uid="uid://dpjcjalrl3qqm"]
 
 [ext_resource type="Script" uid="uid://dy6ugcysjhr6t" path="res://scenes/ui/title_screen.gd" id="1_eb34j"]
 [ext_resource type="PackedScene" uid="uid://c5ij3qjdkkvnf" path="res://scenes/levels/level_1.tscn" id="2_aqpy5"]
+[ext_resource type="Texture2D" uid="uid://bonw2g0maktn1" path="res://assets/textures/world.png" id="3_w8uqo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w8uqo"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,10 +17,70 @@ background_color = Color(0.3553136, 0.35531354, 0.35531357, 1)
 sky = SubResource("Sky_a4ium")
 tonemap_mode = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6q06x"]
+shading_mode = 0
+albedo_texture = ExtResource("3_w8uqo")
+uv1_scale = Vector3(4, 4, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a4ium"]
+material = SubResource("StandardMaterial3D_6q06x")
+size = Vector2(72, 72)
+
 [sub_resource type="LabelSettings" id="LabelSettings_aqpy5"]
 font_size = 116
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
+
+[sub_resource type="Animation" id="Animation_w8uqo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["twofold"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 48)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(476, 102)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_aqpy5"]
 resource_name = "idle"
@@ -48,57 +109,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(64, 48), Vector2(64, 60)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(476, 102)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_w8uqo"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["twofold"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(64, 48)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -423,7 +433,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1088, 648)]
+"values": [Vector2(1152, 648)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -524,6 +534,32 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_r23qo")
 
+[node name="worldbox" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, 0)
+mesh = SubResource("PlaneMesh_a4ium")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldbox"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -36, 20, 0)
+mesh = SubResource("PlaneMesh_a4ium")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldbox"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 20, -36)
+mesh = SubResource("PlaneMesh_a4ium")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldbox"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 36, 20, 0)
+mesh = SubResource("PlaneMesh_a4ium")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldbox"]
+transform = Transform3D(-3.5527137e-15, 0, -0.99999994, 1, -4.371138e-08, 0, -4.371139e-08, -0.99999994, 0, 0, 20, 36)
+mesh = SubResource("PlaneMesh_a4ium")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldbox"]
+transform = Transform3D(-3.5527137e-15, -3.3655287e-30, -0.9999999, 2.9802322e-08, -1, 2.0454275e-22, -1, 2.9802322e-08, 1.5695119e-22, 0, 56, 0)
+mesh = SubResource("PlaneMesh_a4ium")
+
 [node name="title" type="Label" parent="."]
 layout_mode = 0
 offset_left = 64.0
@@ -594,6 +630,9 @@ offset_top = -4.0
 offset_right = 320.0
 offset_bottom = 60.0
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_aqpy5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_w8uqo")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_a4ium")
@@ -603,6 +642,7 @@ text = "START            "
 alignment = 2
 
 [node name="credits" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -611,6 +651,7 @@ offset_top = 68.0
 offset_right = 320.0
 offset_bottom = 132.0
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_aqpy5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_w8uqo")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_a4ium")
@@ -628,6 +669,9 @@ offset_top = 140.0
 offset_right = 320.0
 offset_bottom = 204.0
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = SubResource("StyleBoxEmpty_aqpy5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_w8uqo")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_a4ium")
@@ -676,7 +720,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -691,5 +734,5 @@ color = Color(0.051970966, 0.05197096, 0.05197095, 1)
 [connection signal="mouse_entered" from="exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="mouse_exited" from="exit" to="." method="_on_exit_mouse_exited"]
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="credits_ui/exit" to="." method="_on_credits_exit_pressed"]
 [connection signal="pressed" from="credits_ui/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="credits_ui/exit" to="." method="_on_credits_exit_pressed"]

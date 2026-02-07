@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctj7c38ccqrgj"]
+[gd_scene load_steps=19 format=3 uid="uid://ctj7c38ccqrgj"]
 
 [ext_resource type="Script" uid="uid://c8humbslvpbq" path="res://scenes/main/main.gd" id="1_l3cfh"]
 [ext_resource type="PackedScene" uid="uid://c5ij3qjdkkvnf" path="res://scenes/levels/level_1.tscn" id="2_k2fmo"]
@@ -21,14 +21,133 @@ tonemap_mode = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_k2fmo"]
 size = Vector3(100, 50, 100)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6q06x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3cfh"]
 shading_mode = 0
 albedo_texture = ExtResource("4_l3cfh")
 uv1_scale = Vector3(4, 4, 4)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ow5a4"]
-material = SubResource("StandardMaterial3D_6q06x")
+material = SubResource("StandardMaterial3D_l3cfh")
 size = Vector2(72, 72)
+
+[sub_resource type="Animation" id="Animation_yei5s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ui/cover:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 648)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ui/cover:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_eina6"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ui/cover:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 0), Vector2(1152, 648)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ui/cover:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 648), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_m0ilf"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ui/cover:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 648), Vector2(1152, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eina6"]
+_data = {
+&"RESET": SubResource("Animation_yei5s"),
+&"hide": SubResource("Animation_eina6"),
+&"show": SubResource("Animation_m0ilf")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_l3cfh"]
+font_size = 24
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="Animation" id="Animation_6q06x"]
+resource_name = "hide"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ow5a4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hujxm"]
+_data = {
+&"RESET": SubResource("Animation_ow5a4"),
+&"hide": SubResource("Animation_6q06x")
+}
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_l3cfh")
@@ -45,7 +164,7 @@ shadow_enabled = true
 [node name="level_1" parent="world" instance=ExtResource("2_k2fmo")]
 
 [node name="player" parent="." instance=ExtResource("3_k2fmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 8.5, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 8.5, -0.20746589)
 
 [node name="reset_area" type="Area3D" parent="."]
 
@@ -78,5 +197,50 @@ mesh = SubResource("PlaneMesh_ow5a4")
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="worldbox"]
 transform = Transform3D(-3.5527137e-15, -3.3655287e-30, -0.9999999, 2.9802322e-08, -1, 2.0454275e-22, -1, 2.9802322e-08, 1.5695119e-22, 0, 56, 0)
 mesh = SubResource("PlaneMesh_ow5a4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eina6")
+}
+
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 128.0
+grow_horizontal = 2
+text = "WASD to Move
+SPACE to switch WORLDS"
+label_settings = SubResource("LabelSettings_l3cfh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/Label"]
+libraries = {
+&"": SubResource("AnimationLibrary_hujxm")
+}
+autoplay = "hide"
+
+[node name="cover" type="ColorRect" parent="ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.051970966, 0.05197096, 0.05197095, 1)
 
 [connection signal="body_entered" from="reset_area" to="." method="_on_reset_area_body_entered"]

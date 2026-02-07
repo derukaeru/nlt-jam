@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="NLT Jam"
-run/main_scene="uid://ctj7c38ccqrgj"
+config/name="twofold"
+run/main_scene="uid://djynssc3ppg8t"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
